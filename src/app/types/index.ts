@@ -18,6 +18,7 @@ export interface Book {
   reviewCount: number;
   inStock: boolean;
   featured: boolean;
+   format: string; 
 }
 
 export interface CartItem {

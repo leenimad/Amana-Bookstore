@@ -15,7 +15,7 @@ interface BookGridProps {
 const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
-  const [sortBy, setSortBy] = useState('title');
+  const [sortBy, setSortBy] = useState('rating');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -75,7 +75,6 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
     // Then sort the filtered books
     const sorted = [...filtered].sort((a, b) => {
       let comparison = 0;
-
       switch (sortBy) {
         case 'title':
           comparison = a.title.localeCompare(b.title);
@@ -98,10 +97,8 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
         default:
           comparison = 0;
       }
-
       return sortOrder === 'asc' ? comparison : -comparison;
     });
-
     return sorted;
   }, [books, searchQuery, selectedGenre, sortBy, sortOrder]);
 
@@ -181,11 +178,11 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
         
         {/* Featured Books Carousel */}
         <div className="relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {currentFeaturedBooks.map(book => (
-              <BookCard key={book.id} book={book} onAddToCart={onAddToCart} />
-            ))}
-          </div>
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+         {currentFeaturedBooks.map(book => (
+        <BookCard key={book.id} book={book} onAddToCart={onAddToCart} />
+         ))}
+       </div>
           
           {/* Show current page info */}
           {totalFeaturedPages > 1 && (

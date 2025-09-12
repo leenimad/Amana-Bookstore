@@ -19,8 +19,9 @@ export const books: Book[] = [
     publisher: 'Al-Biruni Academic Press',
     rating: 4.8,
     reviewCount: 23,
-    inStock: true,
+    inStock: false,
     featured: true,
+    format: 'Hardcover'
   },
   {
     id: '2',
@@ -40,6 +41,7 @@ export const books: Book[] = [
     reviewCount: 18,
     inStock: true,
     featured: true,
+    format: ''
   },
   // Astronomy Textbooks
   {
@@ -60,6 +62,7 @@ export const books: Book[] = [
     reviewCount: 12,
     inStock: false,
     featured: false,
+    format: ''
   },
   {
     id: '4',
@@ -79,6 +82,7 @@ export const books: Book[] = [
     reviewCount: 9,
     inStock: true,
     featured: true,
+    format: ''
   },
   // Architecture Textbooks
   {
@@ -99,6 +103,7 @@ export const books: Book[] = [
     reviewCount: 15,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '6',
@@ -118,6 +123,7 @@ export const books: Book[] = [
     reviewCount: 2,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Mathematics Textbooks
   {
@@ -138,6 +144,7 @@ export const books: Book[] = [
     reviewCount: 21,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '8',
@@ -157,6 +164,7 @@ export const books: Book[] = [
     reviewCount: 16,
     inStock: true,
     featured: true,
+    format: ''
   },
   // Biology Textbooks
   {
@@ -177,6 +185,7 @@ export const books: Book[] = [
     reviewCount: 14,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '10',
@@ -196,6 +205,7 @@ export const books: Book[] = [
     reviewCount: 10,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Chemistry Textbooks
   {
@@ -216,6 +226,7 @@ export const books: Book[] = [
     reviewCount: 17,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '12',
@@ -235,6 +246,7 @@ export const books: Book[] = [
     reviewCount: 13,
     inStock: false,
     featured: false,
+    format: ''
   },
   // Computer Science
   {
@@ -255,6 +267,7 @@ export const books: Book[] = [
     reviewCount: 22,
     inStock: true,
     featured: true,
+    format: ''
   },
   // Engineering
   {
@@ -275,6 +288,7 @@ export const books: Book[] = [
     reviewCount: 15,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Earth Sciences
   {
@@ -295,6 +309,7 @@ export const books: Book[] = [
     reviewCount: 9,
     inStock: true,
     featured: true,
+    format: ''
   },
   // Additional Physics Books
   {
@@ -315,6 +330,7 @@ export const books: Book[] = [
     reviewCount: 18,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '17',
@@ -334,6 +350,7 @@ export const books: Book[] = [
     reviewCount: 21,
     inStock: false,
     featured: true,
+    format: ''
   },
   // Additional Mathematics Books
   {
@@ -354,6 +371,7 @@ export const books: Book[] = [
     reviewCount: 16,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '19',
@@ -373,6 +391,7 @@ export const books: Book[] = [
     reviewCount: 9,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '20',
@@ -392,6 +411,7 @@ export const books: Book[] = [
     reviewCount: 3,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Additional Biology Books
   {
@@ -412,6 +432,7 @@ export const books: Book[] = [
     reviewCount: 23,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '22',
@@ -431,6 +452,7 @@ export const books: Book[] = [
     reviewCount: 15,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '23',
@@ -450,6 +472,7 @@ export const books: Book[] = [
     reviewCount: 12,
     inStock: false,
     featured: false,
+    format: ''
   },
   // Additional Chemistry Books
   {
@@ -470,6 +493,7 @@ export const books: Book[] = [
     reviewCount: 18,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '25',
@@ -489,6 +513,7 @@ export const books: Book[] = [
     reviewCount: 14,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Additional Computer Science Books
   {
@@ -509,6 +534,7 @@ export const books: Book[] = [
     reviewCount: 32,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '27',
@@ -528,6 +554,7 @@ export const books: Book[] = [
     reviewCount: 21,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '28',
@@ -547,6 +574,7 @@ export const books: Book[] = [
     reviewCount: 16,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Additional Engineering Books
   {
@@ -567,6 +595,7 @@ export const books: Book[] = [
     reviewCount: 19,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '30',
@@ -586,6 +615,7 @@ export const books: Book[] = [
     reviewCount: 21,
     inStock: false,
     featured: false,
+    format: ''
   },
   {
     id: '31',
@@ -605,6 +635,7 @@ export const books: Book[] = [
     reviewCount: 15,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Additional Specialized Sciences
   {
@@ -625,6 +656,7 @@ export const books: Book[] = [
     reviewCount: 18,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '33',
@@ -644,6 +676,7 @@ export const books: Book[] = [
     reviewCount: 14,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '34',
@@ -663,6 +696,7 @@ export const books: Book[] = [
     reviewCount: 10,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '35',
@@ -682,6 +716,7 @@ export const books: Book[] = [
     reviewCount: 12,
     inStock: false,
     featured: false,
+    format: ''
   },
   // Additional Medical Sciences
   {
@@ -702,6 +737,7 @@ export const books: Book[] = [
     reviewCount: 28,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '37',
@@ -721,6 +757,7 @@ export const books: Book[] = [
     reviewCount: 19,
     inStock: true,
     featured: false,
+    format: ''
   },
   // Additional Interdisciplinary Sciences
   {
@@ -741,6 +778,7 @@ export const books: Book[] = [
     reviewCount: 15,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '39',
@@ -760,6 +798,7 @@ export const books: Book[] = [
     reviewCount: 0,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '40',
@@ -779,6 +818,7 @@ export const books: Book[] = [
     reviewCount: 0,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '41',
@@ -798,6 +838,7 @@ export const books: Book[] = [
     reviewCount: 21,
     inStock: false,
     featured: false,
+    format: ''
   },
   {
     id: '42',
@@ -817,6 +858,7 @@ export const books: Book[] = [
     reviewCount: 18,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '43',
@@ -836,6 +878,7 @@ export const books: Book[] = [
     reviewCount: 14,
     inStock: true,
     featured: false,
+    format: ''
   },
   {
     id: '44',
@@ -855,6 +898,7 @@ export const books: Book[] = [
     reviewCount: 1,
     inStock: true,
     featured: true,
+    format: ''
   },
   {
     id: '45',
@@ -874,5 +918,27 @@ export const books: Book[] = [
     reviewCount: 16,
     inStock: true,
     featured: true,
-  }
+    format: ''
+  },
+
+   {
+     id: '46',
+     title: 'The Art of Code',
+     author: 'Dr. Aysha Al-Hassani',
+     description: 'An elegant exploration of software design principles and clean code practices for the modern developer.',
+     price: 75.00,
+     image: '/images/book4.jpg',
+     isbn: '978-4678901234',
+     genre: ['Computer Science', 'Software Design'],
+     tags: ['Clean Code', 'Programming', 'Software Architecture'],
+     datePublished: '2023-10-01',
+     pages: 410,
+     language: 'English',
+     publisher: 'The Digital Scribe Press',
+     rating: 4.9,
+     reviewCount: 30,
+     inStock: true,
+     featured: true,
+     format: ''
+   }
 ];

@@ -29,13 +29,10 @@ const Navbar: React.FC = () => {
         setCartItemCount(0);
       }
     };
-
     // Initial update
     updateCartCount();
-
     // Listen for custom event to update cart count
     window.addEventListener('cartUpdated', updateCartCount);
-
     // Clean up the event listener
     return () => {
       window.removeEventListener('cartUpdated', updateCartCount);
@@ -49,13 +46,13 @@ const Navbar: React.FC = () => {
           Amana Bookstore
         </Link>
         <div className="flex items-center space-x-4">
-          <Link href="/" className={`text-gray-600 hover:text-blue-500 cursor-pointer ${pathname === '/' ? 'text-blue-500 font-semibold' : ''}`}>
+          <Link href="/" className={`text-gray-600 hover:text-green-500 cursor-pointer ${pathname === '/' ? 'text-green-500 font-semibold' : ''}`}>
             Home
           </Link>
-          <Link href="/cart" className={`text-gray-600 hover:text-blue-500 flex items-center cursor-pointer ${pathname === '/cart' ? 'text-blue-500 font-semibold' : ''}`}>
+          <Link href="/cart" className={`text-gray-600 hover:text-green-500 flex items-center cursor-pointer ${pathname === '/cart' ? 'text-green-500 font-semibold' : ''}`}>
             My Cart
             {cartItemCount > 0 && (
-              <span className="ml-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="ml-2 bg-green-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                 {cartItemCount}
               </span>
             )}
