@@ -47,7 +47,7 @@ if (!uri) {
 
 // We still need the second argument for Next.js to recognize this as a dynamic route,
 // but we will not use it directly to avoid the error.
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request) {
   
   // WORKAROUND: We get the ID from the URL directly.
   // The URL pathname will be something like "/api/books/4"

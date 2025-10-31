@@ -100,8 +100,12 @@ export default function BookDetailPage() {
           setBookReviews(reviewsData);
           
           setError(null);
-        } catch (e: any) {
-          setError(e.message);
+       } catch (e) {
+          if (e instanceof Error) {
+            setError(e.message);
+          } else {
+            setError('An unknown error occurred.');
+          }
         } finally {
           setIsLoading(false);
         }
