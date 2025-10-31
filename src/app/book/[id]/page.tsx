@@ -1,12 +1,75 @@
-// src/app/book/[id]/page.tsx
+// // src/app/book/[id]/page.tsx
+// 'use client';
+
+// import { useState, useEffect } from 'react';
+// import { useParams, useRouter } from 'next/navigation';
+// import Link from 'next/link';
+// import { books } from '../../data/books';
+// import { reviews } from '../../data/reviews';
+// import { Book, CartItem, Review } from '../../types';
+
+// export default function BookDetailPage() {
+//   const [book, setBook] = useState<Book | null>(null);
+//   const [bookReviews, setBookReviews] = useState<Review[]>([]);
+//   const [quantity, setQuantity] = useState(1);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const params = useParams();
+//   const router = useRouter();
+//   const { id } = params;
+
+//   useEffect(() => {
+//     if (id) {
+//       const foundBook = books.find((b) => b.id === id);
+//       if (foundBook) {
+//         setBook(foundBook);
+//         // Get reviews for this book
+//         const bookReviewsData = reviews.filter((review) => review.bookId === id);
+//         setBookReviews(bookReviewsData);
+//       } else {
+//         setError('Book not found.');
+//       }
+//       setIsLoading(false);
+//     }
+//   }, [id]);
+
+//   const handleAddToCart = () => {
+//     if (!book) return;
+
+//     const cartItem: CartItem = {
+//       id: `${book.id}-${Date.now()}`,
+//       bookId: book.id,
+//       quantity: quantity,
+//       addedAt: new Date().toISOString(),
+//     };
+//     // Retrieve existing cart from localStorage
+//     const storedCart = localStorage.getItem('cart');
+//     const cart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
+//     // Check if the book is already in the cart
+//     const existingItemIndex = cart.findIndex((item) => item.bookId === book.id);
+
+//     if (existingItemIndex > -1) {
+//       // Update quantity if item already exists
+//       cart[existingItemIndex].quantity += quantity;
+//     } else {
+//       // Add new item to cart
+//       cart.push(cartItem);
+//     }
+//     // Save updated cart to localStorage
+//     localStorage.setItem('cart', JSON.stringify(cart));
+//     // Dispatch a custom event to notify the Navbar
+//     window.dispatchEvent(new CustomEvent('cartUpdated'));
+//     // Redirect to the cart page after adding
+//     router.push('/cart');
+//   };
+  // src/app/book/[id]/page.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { books } from '../../data/books';
-import { reviews } from '../../data/reviews';
-import { Book, CartItem, Review } from '../../types';
+import { Book, Review } from '../../types'; // Removed CartItem as we create it on the fly
 
 export default function BookDetailPage() {
   const [book, setBook] = useState<Book | null>(null);
@@ -21,49 +84,53 @@ export default function BookDetailPage() {
 
   useEffect(() => {
     if (id) {
-      const foundBook = books.find((b) => b.id === id);
-      if (foundBook) {
-        setBook(foundBook);
-        // Get reviews for this book
-        const bookReviewsData = reviews.filter((review) => review.bookId === id);
-        setBookReviews(bookReviewsData);
-      } else {
-        setError('Book not found.');
-      }
-      setIsLoading(false);
+      const fetchBookData = async () => {
+        setIsLoading(true);
+        try {
+          // Fetch book details from our new API endpoint
+          const bookRes = await fetch(`/api/books/${id}`);
+          if (!bookRes.ok) throw new Error('Book not found.');
+          const bookData: Book = await bookRes.json();
+          setBook(bookData);
+
+          // Fetch reviews for this book using our updated reviews API
+          const reviewsRes = await fetch(`/api/reviews?bookId=${id}`);
+          if (!reviewsRes.ok) throw new Error('Could not fetch reviews.');
+          const reviewsData: Review[] = await reviewsRes.json();
+          setBookReviews(reviewsData);
+          
+          setError(null);
+        } catch (e: any) {
+          setError(e.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchBookData();
     }
   }, [id]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!book) return;
 
-    const cartItem: CartItem = {
-      id: `${book.id}-${Date.now()}`,
-      bookId: book.id,
-      quantity: quantity,
-      addedAt: new Date().toISOString(),
-    };
-    // Retrieve existing cart from localStorage
-    const storedCart = localStorage.getItem('cart');
-    const cart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
-    // Check if the book is already in the cart
-    const existingItemIndex = cart.findIndex((item) => item.bookId === book.id);
+    try {
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookId: book.id, quantity: quantity }),
+      });
 
-    if (existingItemIndex > -1) {
-      // Update quantity if item already exists
-      cart[existingItemIndex].quantity += quantity;
-    } else {
-      // Add new item to cart
-      cart.push(cartItem);
+      if (!res.ok) {
+        throw new Error('Failed to add item to cart');
+      }
+
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
+      router.push('/cart');
+    } catch (error) {
+      console.error(error);
+      alert('Could not add item to cart. Please try again.');
     }
-    // Save updated cart to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    // Dispatch a custom event to notify the Navbar
-    window.dispatchEvent(new CustomEvent('cartUpdated'));
-    // Redirect to the cart page after adding
-    router.push('/cart');
   };
-  
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -199,7 +266,7 @@ export default function BookDetailPage() {
         {bookReviews.length > 0 ? (
           <div className="space-y-6">
             {bookReviews.map((review) => (
-              <div key={review.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+              <div key={review._id} className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center">

@@ -7,10 +7,10 @@ import { Book } from '../types';
 
 interface BookCardProps {
   book: Book;
-  onAddToCart?: (bookId: string) => void;
+  //onAddToCart?: (bookId: string) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
+const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -54,33 +54,29 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
     return <div className="flex items-center">{stars}</div>;
   };
 
-  // Handle add to cart
-  const handleAddToCart = async (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent navigation when clicking the button
-    e.stopPropagation();
-    
-    if (!book.inStock || isAddingToCart) return;
-    
-    setIsAddingToCart(true);
-    
-    try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      if (onAddToCart) {
-        onAddToCart(book.id);
-      }
-      
-      // Show success feedback
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    } finally {
-      setIsAddingToCart(false);
-    }
-  };
+const handleAddToCart = async (e: React.MouseEvent) => {
+e.preventDefault();
+e.stopPropagation();
+if (!book.inStock || isAddingToCart) return;
+setIsAddingToCart(true);
+try {
+const res = await fetch('/api/cart', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ bookId: book.id, quantity: 1 }), // Adds 1 item
+});
 
+if (!res.ok) throw new Error('Failed to add to cart');
+
+setShowSuccess(true);
+window.dispatchEvent(new CustomEvent('cartUpdated')); // Notify Navbar
+setTimeout(() => setShowSuccess(false), 2000);
+} catch (error) {
+console.error('Error adding to cart:', error);
+} finally {
+setIsAddingToCart(false);
+}
+};
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
       {/* Book Cover - Clickable */}
