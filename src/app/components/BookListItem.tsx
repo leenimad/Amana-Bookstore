@@ -7,10 +7,10 @@ import { Book } from '../types';
 
 interface BookListItemProps {
   book: Book;
-  onAddToCart?: (bookId: string) => void;
+  //onAddToCart?: (bookId: string) => void;
 }
 
-const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
+const BookListItem: React.FC<BookListItemProps> = ({ book }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -66,9 +66,9 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAddToCart }) => {
     try {
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      if (onAddToCart) {
-        onAddToCart(book.id);
-      }
+      // if (onAddToCart) {
+      //   onAddToCart(book.id);
+      // }
       
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2000);

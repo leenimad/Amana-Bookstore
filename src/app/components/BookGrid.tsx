@@ -9,10 +9,10 @@ import Pagination from './Pagination';
 
 interface BookGridProps {
   books: Book[];
-  onAddToCart?: (bookId: string) => void;
+ // onAddToCart?: (bookId: string) => void;
 }
 
-const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
+const BookGrid: React.FC<BookGridProps> = ({ books }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
   const [sortBy, setSortBy] = useState('rating');
@@ -180,7 +180,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
         <div className="relative">
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
          {currentFeaturedBooks.map(book => (
-        <BookCard key={book.id} book={book} onAddToCart={onAddToCart} />
+        <BookCard key={book.id} book={book} />
          ))}
        </div>
           
@@ -282,7 +282,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onAddToCart }) => {
           <>
             <div className="space-y-3">
               {paginatedBooks.map(book => (
-                <BookListItem key={book.id} book={book} onAddToCart={onAddToCart} />
+                <BookListItem key={book.id} book={book} />
               ))}
             </div>
             
