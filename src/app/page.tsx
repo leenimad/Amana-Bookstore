@@ -33,13 +33,20 @@ import { Book } from './types';
 
 // This function now runs on the server to fetch data
 async function getBooks(): Promise<Book[]> {
+  // This creates the correct URL for both local and deployed environments
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : 'http://localhost:3000';
+  
+  const url = `${baseUrl}/api/books`;
+
   try {
-    // In production, use an absolute URL from an environment variable
-    const res = await fetch('http://localhost:3000/api/books', { 
-      cache: 'no-store' // Ensures you always get fresh data
+    const res = await fetch(url, { 
+      cache: 'no-store'
     });
+    
     if (!res.ok) {
-      console.error('Failed to fetch books');
+      console.error(`Failed to fetch books from ${url}, status: ${res.status}`);
       return [];
     }
     return res.json();
@@ -48,7 +55,6 @@ async function getBooks(): Promise<Book[]> {
     return [];
   }
 }
-
 export default async function HomePage() {
   const books = await getBooks();
 
