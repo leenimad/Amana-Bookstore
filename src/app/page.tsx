@@ -30,7 +30,7 @@
 // src/app/page.tsx
 import BookGrid from './components/BookGrid';
 import { Book } from './types';
-
+export const dynamic = 'force-dynamic';
 // This function now runs on the server to fetch data
 async function getBooks(): Promise<Book[]> {
   // This creates the correct URL for both local and deployed environments
